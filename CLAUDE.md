@@ -75,6 +75,14 @@ Ver `README.md` para el paso a paso completo.
   para un corte: se desborda al mes siguiente. La barra de progreso mide el ciclo real
   (que no siempre son 30 días).
 
+## Sin señal (16/10/2026, traído de mi-cartera; revisado por code-reviewer, Codex y qa-tester)
+
+- Igual que en `mi-cartera` (su CLAUDE.md, sección "Sin señal"): la carga desde caché nunca se marca confirmada (banda arriba, punto rojo, reintento solo); **gasto e ingreso** sin señal van a una bandeja propia del teléfono (`cartera-bandeja-<carpeta del sitio>`) y suben por `txDinero` con `requerirAusentes`; lo demás pide señal y avisa al instante.
+- **Regla que no se rompe:** `altaGasto`/`altaIngreso` llevan `requerirAusentes:[ref]` desde el primer intento (sin eso, una respuesta perdida cobraba dos veces).
+- La lista de `desdeCache` en `loadFromFirebase` nombra EXACTAMENTE las lecturas de esta copia (aquí no hay `fDoc`; sí `ctaDoc`): una variable que no existe tumba la carga.
+- **Cuentas configurables:** la copia local (`pintarDesdeCache`) carga `<NS>/cuentas` dentro del todo o nada; sin ella no se pinta ni se captura con las cuentas de fábrica. Un gasto pendiente de una cuenta que se apagó queda "para revisar": se enciende y se reintenta.
+- Pruebas con emuladores (nunca producción): `Desktop\CARTERA\pruebas-sin-senal\` (`adaptar-pruebas.mjs` las adapta a cada copia).
+
 ## Reglas de trabajo
 
 1. **Un solo commit por tanda de cambios** — GitHub Pages atasca su cola de deploys si se
