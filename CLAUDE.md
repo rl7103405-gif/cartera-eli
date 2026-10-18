@@ -92,3 +92,7 @@ Ver `README.md` para el paso a paso completo.
 4. Validar siempre lo que viene de Firestore (`Number.isFinite`, arrays, regex) — un dato
    corrupto no debe romper la app ni propagar `NaN` a los saldos.
 5. Escapar con `escapeHtml()` cualquier texto del usuario que se interpole en HTML.
+
+## Deudas con tarjeta (16/10/2026)
+
+Igual que en `mi-cartera` (su CLAUDE.md, sección "Deudas con tarjeta"): las tarjetas de crédito de esta copia sirven para "me deben"/"le pagué" (suben su deuda) y se apagan cuando el dinero entra; `txDinero` trata un movimiento con id ya aplicado como `ya-existe` (éxito, sin cobrar dos veces) y `yaAplicado()` repinta Deudas. Pruebas: `deudas-tarjeta.mjs` y `deudas-doble.mjs` en `Desktop\CARTERA\pruebas-sin-senal\`.
